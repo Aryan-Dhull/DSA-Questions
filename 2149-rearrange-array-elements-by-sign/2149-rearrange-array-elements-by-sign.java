@@ -1,23 +1,18 @@
 class Solution {
     public int[] rearrangeArray(int[] nums) {
-        int l=nums.length;
-        int[] even=new int[l/2];
-        int[] odd =new int[l/2];
-        int e=0,o=0;
+        int pos=0;
+        int neg=1;
+        int[] arr=new int[nums.length];
         for(int i=0;i<nums.length;i++){
-            if(nums[i]<0){odd[o++]=nums[i];}
-            else{even[e++]=nums[i];}
-        }
-        e=0;
-        o=0;
-        for(int i=0;i<nums.length;i++){
-            if(i%2==0){
-                nums[i]=even[e++];
+            if(nums[i]>0){
+                arr[pos]=nums[i];
+                pos+=2;
             }
-            else{
-                nums[i]=odd[o++];
+            if(nums[i]<0){
+                arr[neg]=nums[i];
+                neg+=2;
             }
         }
-        return nums;
+        return arr;
     }
 }
