@@ -11,11 +11,10 @@ public class Solution extends GuessGame {
     public int guessNumber(int n) {
         int l = 0;
         while(l <= n) {
-            int m = l + (n - l) / 2;
-            int pick = guess(m);            
-            if(pick == 0)
+            int m = l + (n - l) / 2;         
+            if(guess(m) == 0)
                 return m;
-            else if (pick == -1)
+            else if (guess(m) == -1)
                 n = m - 1;
             else 
                 l = m + 1;
