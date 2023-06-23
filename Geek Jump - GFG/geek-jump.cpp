@@ -13,22 +13,39 @@ class Solution {
 //         if(ind>1)two=f(ind-2,height)+abs(height[ind]-height[ind-2]);
 //         return min(one,two);
 //     }
-    int f(int ind,vector<int> &height,vector<int> &dp){
-        if(ind==0)return 0;
-        if(dp[ind]!=-1)return dp[ind];
-        int one=f(ind-1,height,dp)+abs(height[ind]-height[ind-1]);
-        int two=INT_MAX;
-        if(ind>1)two=f(ind-2,height,dp)+abs(height[ind]-height[ind-2]);
-        return dp[ind]=min(one,two);
+
+    // int f(int ind,vector<int> &height,vector<int> &dp){
+    //     if(ind==0)return 0;
+    //     if(dp[ind]!=-1)return dp[ind];
+    //     int one=f(ind-1,height,dp)+abs(height[ind]-height[ind-1]);
+    //     int two=INT_MAX;
+    //     if(ind>1)two=f(ind-2,height,dp)+abs(height[ind]-height[ind-2]);
+    //     return dp[ind]=min(one,two);
+    // }
+    
+    int f(int n,vector<int> &height){
+        vector<int> dp(n,0);
+        dp[0]=0;
+        for(int i=1;i<n;i++){
+            int one=dp[i-1]+abs(height[i]-height[i-1]);
+            int two=INT_MAX;
+            if(i>1)two=dp[i-2]+abs(height[i]-height[i-2]);
+            dp[i]=min(one,two);
+        }
+        return dp[n-1];
     }
   public:
     // int minimumEnergy(vector<int>& height, int n) {
     //     return f(n-1,height);
     // }
     
+    // int minimumEnergy(vector<int>&height,int n){
+    //     vector<int> dp(n+1,-1);
+    //     return f(n-1,height,dp);
+    // }
+    
     int minimumEnergy(vector<int>&height,int n){
-        vector<int> dp(n+1,-1);
-        return f(n-1,height,dp);
+        return f(n,height);
     }
 };
 
