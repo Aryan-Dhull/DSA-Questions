@@ -6,13 +6,13 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   private:
-//     int f(int ind,vector<int> &height){
-//         if(ind==0)return 0;
-//         int one=f(ind-1,height)+abs(height[ind]-height[ind-1]);
-//         int two=INT_MAX;
-//         if(ind>1)two=f(ind-2,height)+abs(height[ind]-height[ind-2]);
-//         return min(one,two);
-//     }
+    //int f(int ind,vector<int> &height){
+    //      if(ind==0)return 0;
+    //      int one=f(ind-1,height)+abs(height[ind]-height[ind-1]);
+    //      int two=INT_MAX;
+    //      if(ind>1)two=f(ind-2,height)+abs(height[ind]-height[ind-2]);
+    //      return min(one,two);
+    //}
 
     // int f(int ind,vector<int> &height,vector<int> &dp){
     //     if(ind==0)return 0;
@@ -23,17 +23,32 @@ class Solution {
     //     return dp[ind]=min(one,two);
     // }
     
+    // int f(int n,vector<int> &height){
+    //     vector<int> dp(n,0);
+    //     dp[0]=0;
+    //     for(int i=1;i<n;i++){
+    //         int one=dp[i-1]+abs(height[i]-height[i-1]);
+    //         int two=INT_MAX;
+    //         if(i>1)two=dp[i-2]+abs(height[i]-height[i-2]);
+    //         dp[i]=min(one,two);
+    //     }
+    //     return dp[n-1];
+    // }
+    
     int f(int n,vector<int> &height){
-        vector<int> dp(n,0);
-        dp[0]=0;
+        int prev=0;
+        int prev2=0;
         for(int i=1;i<n;i++){
-            int one=dp[i-1]+abs(height[i]-height[i-1]);
+            int one=prev+abs(height[i]-height[i-1]);
             int two=INT_MAX;
-            if(i>1)two=dp[i-2]+abs(height[i]-height[i-2]);
-            dp[i]=min(one,two);
+            if(i>1)two=prev2+abs(height[i]-height[i-2]);
+            int curi=min(one,two);
+            prev2=prev;
+            prev=curi;
         }
-        return dp[n-1];
+        return prev;
     }
+    
   public:
     // int minimumEnergy(vector<int>& height, int n) {
     //     return f(n-1,height);
