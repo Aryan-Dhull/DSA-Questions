@@ -9,15 +9,17 @@ using namespace std;
 class Solution{
 private:
     int f(int* arr,int n){
-        vector<int> dp(n,-1);
-        dp[0]=arr[0];
+        int prev=arr[0];
+        int prev2=0;
         for(int i=1;i<n;i++){
             int pick=arr[i];
-            if(i>1)pick+=dp[i-2];
-            int notpick=dp[i-1];
-            dp[i]=max(pick,notpick);
+            if(i>1)pick+=prev2;
+            int notpick=prev;
+            int curi=max(pick,notpick);
+            prev2=prev;
+            prev=curi;
         }
-        return dp[n-1];
+        return prev;
     }
 public:	
 	// calculate the maximum sum with out adjacent
